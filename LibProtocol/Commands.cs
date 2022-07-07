@@ -9,6 +9,6 @@ namespace LibProtocol
     [Serializable]
     public enum Command
     {
-        Registration, Login, addPost, Online, Reaction, Comment, OnlineComment, Chek, Remove, Subscription, Search
+        Registration, Login, addPost, Online, Reaction, Comment, OnlineComment, Chek, Remove, Subscription, UnSubscription, Search, OnlineFreands, FreandPage, LineBlog, addBook, OnlineBook, DeleteComment, DeleteBook, Exit, Update, ChekBook, addLibrary, removeLibrary, SearchBook
     }
 }

@@ -37,6 +37,7 @@ namespace Server.Commands
                         sum++;
                     }
                 }
+                sum += add.Books.Where(b => b.idUser == id).Count();
                 response.data = sum;
                 response.code = LibProtocol.ResponseCode.Ok;
                 response.succces = true;   

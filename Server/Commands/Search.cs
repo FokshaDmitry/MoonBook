@@ -26,7 +26,7 @@ namespace Server.Commands
             {
                 foreach (var item in add.Users)
                 {
-                    if ($"{item.Name.ToLower()}{item.Surname.ToLower()}" == data.Name.Replace(" ", "").ToLower())
+                    if ($"{item.Name.ToLower()}{item.Surname.ToLower()}" == data.Name.ToLower())
                     {
                         online.users.Add(item);
                     }

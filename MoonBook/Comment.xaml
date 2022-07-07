@@ -10,13 +10,13 @@
         <RowDefinition Height="*"/>
     </Grid.RowDefinitions>
     <Ellipse Grid.Row="0" x:Name="PhotoComent" Width="30" Height="30" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-    <TextBlock Grid.Row="0" x:Name="NameComment" Margin="39,4,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="8"/>
+    <TextBlock Grid.Row="0" x:Name="NameComment" Margin="35,4,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="8"/>
     <TextBlock Grid.Row="1" x:Name="TextComment" HorizontalAlignment="Left" MinWidth="300"/>
-    <Button  HorizontalAlignment="Right" Margin="281,1,2,0" VerticalAlignment="Top" BorderBrush="{x:Null}" Foreground="{x:Null}" Width="12" Height="12">
+    <Button x:Name="DeliteComment" HorizontalAlignment="Right" Margin="281,1,2,0" VerticalAlignment="Top" BorderBrush="{x:Null}" Foreground="{x:Null}" Width="12" Height="12" Click="DeliteComment_Click">
         <Button.Background>
-            <ImageBrush ImageSource="/delete_FILL0_wght400_GRAD0_opsz48.png"/>
+            <ImageBrush ImageSource="/img/delete_FILL0_wght400_GRAD0_opsz48.png"/>
         </Button.Background>
     </Button>
-    <TextBlock HorizontalAlignment="Left" Margin="30,15,0,0" TextWrapping="Wrap" x:Name="DataComent" VerticalAlignment="Top" Height="8" FontSize="6"/>
+    <TextBlock HorizontalAlignment="Left" Margin="35,15,0,0" TextWrapping="Wrap" x:Name="DataComent" VerticalAlignment="Top" Height="8" FontSize="6"/>
 </Grid>
 

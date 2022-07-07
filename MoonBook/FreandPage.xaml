@@ -1,0 +1,37 @@
+﻿<Grid x:Class="MoonBook.FreandPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:MoonBook"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800" Background="#FF1F1F2B">
+    <ListBox SelectionChanged="ListUser_SelectionChanged" x:Name="ListUser" Margin="10,55,574,0" Background="{x:Null}" BorderBrush="Black" Width="170" Height="340" HorizontalAlignment="Left" VerticalAlignment="Top" />
+    <TextBox x:Name="SeachText" Margin="10,14,592,363" TextWrapping="Wrap" Width="150" BorderBrush="Black" Background="{x:Null}" Foreground="White" Height="20" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+    <Button Click="Search_Click" Foreground="{x:Null}" Height="20" Width="20" BorderBrush="Black" Margin="160,14,572,363" HorizontalAlignment="Left" VerticalAlignment="Top" >
+        <Button.Background>
+            <ImageBrush ImageSource="/img/search_FILL0_wght400_GRAD0_opsz48.png"/>
+        </Button.Background>
+    </Button>
+    <TextBlock Margin="10,39,572,342" TextWrapping="Wrap" Text="My Subscritions" Height="16" Width="170" Foreground="Black" Background="#FF363662" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+    <Ellipse x:Name="PhotoFreand" HorizontalAlignment="Left" Height="105" Margin="213,14,0,0" VerticalAlignment="Top" Width="105"/>
+    <ListBox x:Name="BlogListFreand" MinWidth="380" MinHeight="265" Margin="362,124,10,10" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+    <TextBlock x:Name="NameFreand" HorizontalAlignment="Left" Margin="213,124,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="Black"/>
+    <TextBlock Grid.Row="0" Margin="362,14,10,0" TextWrapping="Wrap" Text="Books" VerticalAlignment="Top" Height="20"  Background="#FF363662" FontWeight="Bold" Foreground="Black"/>
+    <ListBox SelectionChanged="FreandBook_SelectionChanged"  x:Name="FreandBook"  Background="{x:Null}" Margin="362,39,10,0" VerticalAlignment="Top" BorderBrush="Black" MinWidth="380" MinHeight="80">
+        <ListBox.ItemsPanel>
+            <ItemsPanelTemplate>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+            </ItemsPanelTemplate>
+        </ListBox.ItemsPanel>
+    </ListBox>
+    <TextBlock x:Name="StatusFreands" HorizontalAlignment="Left" Margin="204,140,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="50" Width="144" Foreground="Black"/>
+    <TextBlock HorizontalAlignment="Left" Margin="194,198,0,0" TextWrapping="Wrap" Text="Freands" VerticalAlignment="Top" Height="20" Width="164" Foreground="Black" Background="#FF363662" FontWeight="Bold"/>
+    <ListBox SelectionChanged="FrendsFreadList_SelectionChanged" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" x:Name="FrendsFreadList" Margin="194,225,0,0" Background="{x:Null}" BorderBrush="Black" Height="162" Width="164" HorizontalAlignment="Left" VerticalAlignment="Top">
+        <ListBox.ItemsPanel>
+            <ItemsPanelTemplate>
+                <WrapPanel Orientation="Horizontal" Width="158" Height="153" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </ItemsPanelTemplate>
+        </ListBox.ItemsPanel>
+    </ListBox>
+</Grid>

@@ -1,4 +1,5 @@
-﻿using Microsoft.Win32;
+﻿using EpubSharp;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -25,155 +26,107 @@ namespace MoonBook
     /// </summary>
     public partial class UserPage : Page
     {
-        ServerConnect server;
+        private int selector;
+        public ServerConnect server;
         public Guid idUser;
-        MainWindow main;
-        BitmapImage imgsource;
-        private OpenFileDialog openFileDialog1;
-        private byte[]? ImageByte;
-        string title;
-        LibProtocol.Online tmp;
-        public UserPage(Guid guid, string? name, string? surname, byte[] photo, bool online, MainWindow main)
+        public MainWindow main;
+        public BitmapImage imgsource;
+        public UserPageLogic logic;
+        public BookPageLogic booklogic;
+        public BlogPage blog;
+        public FreandPageLogic freand;
+        public UserPage(Guid guid, string? name, string? surname, string status, byte[] photo, DateTime birthday, bool online, string login, MainWindow main)
         {
             InitializeComponent();
-            this.main = main;
+            selector = 0;
             idUser = guid;
-            Name.Text = $"{name} {surname}";
-            title = "";
+            logic = new UserPageLogic(idUser, name, surname, status, photo, birthday, login, this);
+            booklogic = new BookPageLogic(idUser);
+            blog = new BlogPage(idUser);
+            freand = new FreandPageLogic(idUser, this);
+
             imgsource = new BitmapImage();
-            if (online) OnlineStatus.Fill = System.Windows.Media.Brushes.LightGreen;
-            else OnlineStatus.Fill = System.Windows.Media.Brushes.LightGray;
             if (photo != null)
             {
                 imgsource.BeginInit();
                 imgsource.StreamSource = new MemoryStream(photo);
                 imgsource.EndInit();
-                Photo.Fill = new ImageBrush(imgsource);
                 minPhoto.Fill = new ImageBrush(imgsource);
             }
-            tmp = new LibProtocol.Online();
+            if (online) OnlineStatus.Fill = System.Windows.Media.Brushes.LightGreen;
+            else OnlineStatus.Fill = System.Windows.Media.Brushes.LightGray;
             server = new ServerConnect();
             server.onError += mess => MessageBox.Show(mess);
-            openFileDialog1 = new OpenFileDialog()
-            {
-                Filter = "Image files (*.BMP, *.JPG, *.GIF, *.TIF, *.PNG, *.ICO, *.EMF, *.WMF)|*.bmp;*.jpg;*.gif; *.tif; *.png; *.ico; *.emf; *.wmf",
-                Title = "Open image file"
-            };
-            server = new ServerConnect();
-            server.onError += mess => MessageBox.Show(mess);
-            Task.Run(() => Online(idUser));
-            Task.Run(() => Check());
         }
-        public void OpenFileDialogForm()
+
+        public void Update()
         {
-            Dispatcher.Invoke(() => openFileDialog1.ShowDialog());
-            if (openFileDialog1.FileName != "")
+            UpdateForm update;
+            Dispatcher.Invoke(() =>
             {
-                try
+                update = new UpdateForm(idUser, logic.name, logic.surname, logic.photo, logic.login, logic.status, logic.birthday, logic);
+                update.Owner = main;
+                update.Show();
+            });
+
+        }
+        public void Exit()
+        {
+            server.Connect();
+            server.Exit(idUser);
+            main.Close();
+        }
+
+        private void Control_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (Control.SelectedIndex == 0)
+            {
+                if (selector != 1)
                 {
-                    Dispatcher.Invoke(() => CheckImg.Fill = new ImageBrush(new BitmapImage(new Uri(openFileDialog1.FileName))));
-                    Dispatcher.Invoke(() => Path.Text = openFileDialog1.FileName);
-                    ImageByte = File.ReadAllBytes(openFileDialog1.FileName);
+                    logic.tokenstop = true;
+                    Task.Run(() => logic.Check());
+                    Page1.Content = logic;
+                    selector = 1;
                 }
-                catch (SecurityException ex)
+            }
+            if (Control.SelectedIndex == 1)
+            {
+                if (selector != 2)
                 {
-                    MessageBox.Show($"Security error.\n\nError message: {ex.Message}\n\n" +
-                    $"Details:\n\n{ex.StackTrace}");
+                    logic.tokenstop = false;
+                    Page2.Content = booklogic;
+                    Task.Run(() => booklogic.Book());
+                    selector = 2;
+                }
+            }
+            if (Control.SelectedIndex == 2)
+            {
+                if (selector != 3)
+                {
+                    logic.tokenstop = false;
+                    Page3.Content = blog;
+                    Task.Run(() => blog.LineBlog());
+                    selector = 3;
+                }
+            }
+            if (Control.SelectedIndex == 3)
+            {
+                if (selector != 4)
+                {
+                    logic.tokenstop = false;
+                    Page4.Content = freand;
+                    Task.Run(() => freand.OnlineFreands());
+                    selector = 4;
                 }
             }
         }
-        public void Check()
+        private void Exit_Click(object sender, RoutedEventArgs e)
         {
-            while (true)
-            {
-                Thread.Sleep(1500);
-                int num = 0;
-                int tmp = 0;
-                server.Connect();
-                Dispatcher.Invoke(() => server.chekOnline(idUser));
-                Dispatcher.Invoke(() => server.waitResponse((res) => 
-                {
-                    foreach (Post item in VewPost.Items)
-                    {
-                        num += item.ListComments.Items.Count;
-                        num += Convert.ToInt32(item.Like.Text);
-                        num += Convert.ToInt32(item.Dislike.Text);
-                    }
-                    num += VewPost.Items.Count;
-                    tmp = (int)res.data;
-
-                }));
-                if (tmp != num)
-                    Task.Run(() => Online(idUser));
-            }
+            Task.Run(() => Exit());
         }
-        public void Online(Guid id)
+        private void Update_Click(object sender, RoutedEventArgs e)
         {
-            server.Connect();
-            Dispatcher.Invoke(() => server.monOnline(id));
-            Dispatcher.Invoke(() =>server.waitResponse((res) => tmp = (LibProtocol.Online)res.data));
-            Dispatcher.Invoke(() => 
-            {
-                VewPost.Items.Clear();
-                foreach (var post in tmp.posts.Join(tmp.users, p => p.IdUser, u => u.Id, (p, u) => new { pos = p, use = u }).Distinct())
-                {
-                    VewPost.Items.Add(new Post($"{post.use.Name} {post.use.Surname}", post.use.Phpto, post.pos.Text, post.pos.Title, post.pos.Image, post.pos.Date, post.pos.Like, post.pos.Dislike, post.pos.Id, idUser, tmp));
-                }
-            });
-            
-        }
-        public void NewPost()
-        {
-            server.Connect();
-            Dispatcher.Invoke(()=> server.addPost(idUser ,Name.Text, title, NewText.Text, ImageByte));
-            Dispatcher.Invoke(() => 
-            {
-                NewText.Text = "";
-                Path.Text = "";
-                title = "";
-                CheckImg.Fill = null;
-            });
-        }
-        public void Search()
-        {
-            server.Connect();
-            Dispatcher.Invoke(() => server.Search(new LibProtocol.Models.User {Id = idUser, Name = SeachText.Text}));
-            Dispatcher.Invoke(() => server.waitResponse((res) => 
-            { 
-                tmp = (LibProtocol.Online)res.data;
-                foreach (var user in tmp.subscriptions.Join(tmp.users, s => s.IdFreand, u => u.Id, (s,u) => new {Sub = s, Use = u}))
-                {
-                    ListUser.Items.Add(new User(idUser, $"{user.Use.Name} {user.Use.Surname}", user.Use.Phpto, user.Use.Online, true, user.Use.Id));
-                    tmp.users.Remove(user.Use);
-                }
-                foreach (var user in tmp.users)
-                {
-                    ListUser.Items.Add(new User(idUser, $"{user.Name} {user.Surname}", user.Phpto, user.Online, false, user.Id));
-
-                }
-            }));
-            
-        }
-        private void Send_Click(object sender, RoutedEventArgs e)
-        {
-            NewText.Text.Replace($">{title}<", "");
-            Task.Run(()=>NewPost());
-        }
-
-        private void Image_Click(object sender, RoutedEventArgs e)
-        {
-            Task.Run(() => OpenFileDialogForm());
-        }
-
-        private void Title_Click(object sender, RoutedEventArgs e)
-        {
-            title = NewText.SelectedText;
-            NewText.SelectedText = $">{NewText.SelectedText.ToUpper()}<";
-        }
-
-        private void Search_Click(object sender, RoutedEventArgs e)
-        {
-            Task.Run(() => Search());
+            Task.Run(() => Update());
         }
     }
 }

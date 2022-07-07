@@ -23,7 +23,11 @@
         <Button Content="Login" HorizontalAlignment="Left" Margin="221,390,0,0" VerticalAlignment="Top" Click="Button_Click"/>
         <PasswordBox HorizontalAlignment="Left" Margin="169,310,0,0" VerticalAlignment="Top" Width="140" x:Name="LogPass"/>
         <PasswordBox HorizontalAlignment="Left" Margin="169,348,0,0" VerticalAlignment="Top" Width="140" x:Name="LogConPass"/>
-        <Ellipse HorizontalAlignment="Left" Height="140" Margin="167,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="140" x:Name="Elips"/>
+        <Ellipse HorizontalAlignment="Left" Height="140" Margin="167,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="140" x:Name="Elips">
+            <Ellipse.Fill>
+                <ImageBrush ImageSource="/img/android_contacts_FILL0_wght400_GRAD0_opsz48.png"/>
+            </Ellipse.Fill>
+        </Ellipse>
 
 
     </Grid>

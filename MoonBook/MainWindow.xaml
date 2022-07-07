@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MoonBook"
         mc:Ignorable="d"
+        d:DesignHeight="490" d:DesignWidth="820"
         Title="MoonBook" MinHeight="490" MinWidth="820" BorderBrush="#FF424242" SizeToContent="WidthAndHeight">
     <Grid Background="#FF212331" x:Name="Panrl">
 
@@ -19,16 +20,11 @@
             </Canvas>
             <Ellipse Height="100" Canvas.Left="360" Stroke="Black" Canvas.Top="44" Width="100" HorizontalAlignment="Center" VerticalAlignment="Top" x:Name="Logo">
                 <Ellipse.Fill>
-                    <ImageBrush ImageSource="/M.png"/>
+                    <ImageBrush ImageSource="/img/M.png"/>
                 </Ellipse.Fill>
             </Ellipse>
             <Button Content="Registration" Canvas.Left="448" Canvas.Top="297" HorizontalAlignment="Left" VerticalAlignment="Center" Width="70" Background="#FF212331" BorderBrush="Black" Click="Registration_Click" />
-            <Button Content="Login" Canvas.Left="375" Canvas.Top="297" HorizontalAlignment="Left" VerticalAlignment="Center" Width="50" Background="#FF212331" BorderBrush="Black" Click="Login_Click"/>
-
-
-
-
+            <Button Content="Login" Canvas.Left="375" Canvas.Top="297" HorizontalAlignment="Center" VerticalAlignment="Top" Width="50" Background="#FF212331" BorderBrush="Black" Click="Login_Click" Height="20"/>
         </Canvas>
-
     </Grid>
 </Window>

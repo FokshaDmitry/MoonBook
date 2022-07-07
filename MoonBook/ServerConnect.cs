@@ -93,6 +93,35 @@ namespace MoonBook
                 onError?.Invoke(ex.Message);
             }
         }
+        public void UpdateData(Guid idUser, string name, string surname, string status, DateTime date, string login, string password, byte[] photo)
+        {
+            LibProtocol.Request request = new LibProtocol.Request();
+            request.command = LibProtocol.Command.Update;
+            request.data = new LibProtocol.Models.User { Id = idUser, Name = name, Surname = surname, Status = status, DateOfBith = date, Login = login, Password = password, Phpto = photo};
+
+            try
+            {
+                bf.Serialize(stream, request);
+            }
+            catch (Exception ex)
+            {
+                onError?.Invoke(ex.Message);
+            }
+        }
+        public void Exit(Guid idUser)
+        {
+            LibProtocol.Request request = new LibProtocol.Request();
+            request.command = LibProtocol.Command.Exit;
+            request.data = idUser;
+            try
+            {
+                bf.Serialize(stream, request);
+            }
+            catch (Exception ex)
+            {
+                onError?.Invoke(ex.Message);
+            }
+        }
         public void addReaction(int reaction, Guid idpost, Guid iduser)
         {
             LibProtocol.Request request = new LibProtocol.Request();
@@ -112,6 +141,118 @@ namespace MoonBook
             LibProtocol.Request request = new LibProtocol.Request();
             request.command = LibProtocol.Command.Subscription;
             request.data = new LibProtocol.Models.Subscriptions { Id = Guid.NewGuid(), IdUser = iduser, IdFreand = idfreand };
+            try
+            {
+                bf.Serialize(stream, request);
+            }
+            catch (Exception ex)
+            {
+                onError?.Invoke(ex.Message);
+            }
+        }
+        public void FreandPage(Guid idFrend)
+        {
+            LibProtocol.Request request = new LibProtocol.Request();
+            request.command = LibProtocol.Command.FreandPage;
+            request.data = idFrend;
+            try
+            {
+                bf.Serialize(stream, request);
+            }
+            catch (Exception ex)
+            {
+                onError?.Invoke(ex.Message);
+            }
+        }
+        public void addLineFreand(Guid idUser)
+        {
+            LibProtocol.Request request = new LibProtocol.Request();
+            request.command = LibProtocol.Command.LineBlog;
+            request.data = idUser;
+            try
+            {
+                bf.Serialize(stream, request);
+            }
+            catch (Exception ex)
+            {
+                onError?.Invoke(ex.Message);
+            }
+        }
+        public void UnSubscribe(Guid iduser, Guid idfreand)
+        {
+            LibProtocol.Request request = new LibProtocol.Request();
+            request.command = LibProtocol.Command.UnSubscription;
+            request.data = new LibProtocol.Models.Subscriptions { IdUser = iduser, IdFreand = idfreand };
+            try
+            {
+                bf.Serialize(stream, request);
+            }
+            catch (Exception ex)
+            {
+                onError?.Invoke(ex.Message);
+            }
+        }
+        public void addLibrary(Guid iduser, Guid idbook)
+        {
+            LibProtocol.Request request = new LibProtocol.Request();
+            request.command = LibProtocol.Command.addLibrary;
+            request.data = new LibProtocol.Models.SubBook { Id = Guid.NewGuid(), idUser = iduser, idBook = idbook };
+            try
+            {
+                bf.Serialize(stream, request);
+            }
+            catch (Exception ex)
+            {
+                onError?.Invoke(ex.Message);
+            }
+        }
+        public void removeLibrary(Guid iduser, Guid idbook)
+        {
+            LibProtocol.Request request = new LibProtocol.Request();
+            request.command = LibProtocol.Command.removeLibrary;
+            request.data = new LibProtocol.Models.SubBook { idUser = iduser, idBook = idbook };
+            try
+            {
+                bf.Serialize(stream, request);
+            }
+            catch (Exception ex)
+            {
+                onError?.Invoke(ex.Message);
+            }
+        }
+        public void Read(Guid iduser, Guid idbook)
+        {
+            LibProtocol.Request request = new LibProtocol.Request();
+            request.command = LibProtocol.Command.ChekBook;
+            request.data = new LibProtocol.Models.SubBook { idUser = iduser, idBook = idbook };
+            try
+            {
+                bf.Serialize(stream, request);
+            }
+            catch (Exception ex)
+            {
+                onError?.Invoke(ex.Message);
+            }
+        }
+        public void DeleteBook(Guid id)
+        {
+            LibProtocol.Request request = new LibProtocol.Request();
+            request.command = LibProtocol.Command.DeleteBook;
+            request.data = id;
+            try
+            {
+                bf.Serialize(stream, request);
+            }
+            catch (Exception ex)
+            {
+                onError?.Invoke(ex.Message);
+            }
+        }
+        public void DeleteComment(Guid id)
+        {
+            LibProtocol.Request request = new LibProtocol.Request();
+            request.command = LibProtocol.Command.DeleteComment;
+            request.data = id;
             try
             {
                 bf.Serialize(stream, request);
@@ -149,6 +290,20 @@ namespace MoonBook
                 onError?.Invoke(ex.Message);
             }
         }
+        public void OnlineFreands(Guid idUser)
+        {
+            LibProtocol.Request request = new LibProtocol.Request();
+            request.command = LibProtocol.Command.OnlineFreands;
+            request.data = idUser;
+            try
+            {
+                bf.Serialize(stream, request);
+            }
+            catch (Exception ex)
+            {
+                onError?.Invoke(ex.Message);
+            }
+        }
         public void Search(LibProtocol.Models.User user)
         {
             LibProtocol.Request request = new LibProtocol.Request();
@@ -163,11 +318,53 @@ namespace MoonBook
                 onError?.Invoke(ex.Message);
             }
         }
+        public void SearchBook(string searchtext)
+        {
+            LibProtocol.Request request = new LibProtocol.Request();
+            request.command = LibProtocol.Command.SearchBook;
+            request.data = searchtext;
+            try
+            {
+                bf.Serialize(stream, request);
+            }
+            catch (Exception ex)
+            {
+                onError?.Invoke(ex.Message);
+            }
+        }
         public void monOnline(Guid iduser)
         {
             LibProtocol.Request request = new LibProtocol.Request();
             request.command = LibProtocol.Command.Online;
             request.data = iduser;
+            try
+            {
+                bf.Serialize(stream, request);
+            }
+            catch (Exception ex)
+            {
+                onError?.Invoke(ex.Message);
+            }
+        }
+        public void OnlineBook(Guid iduser)
+        {
+            LibProtocol.Request request = new LibProtocol.Request();
+            request.command = LibProtocol.Command.OnlineBook;
+            request.data = iduser;
+            try
+            {
+                bf.Serialize(stream, request);
+            }
+            catch (Exception ex)
+            {
+                onError?.Invoke(ex.Message);
+            }
+        }
+        public void addBook(Guid IdUser, byte[] coverImage, string author, string title, String toPlainText)
+        {
+            LibProtocol.Request request = new LibProtocol.Request();
+            request.command = LibProtocol.Command.addBook;
+            request.data = new LibProtocol.Models.Books{ Id = Guid.NewGuid(), Author = author, CoverImage = coverImage,  Title = title, TextContent = toPlainText, idUser = IdUser};
             try
             {
                 bf.Serialize(stream, request);
