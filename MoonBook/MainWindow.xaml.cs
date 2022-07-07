@@ -48,8 +48,7 @@ namespace MoonBook
                 Dispatcher.Invoke(() => LoginForm.Children.Remove(GroupLogin));
                 Dispatcher.Invoke(() => GroupLogin.Width = 0);
 
-                Dispatcher.Invoke(() =>
-                    this.Content = new UserPage(user.Id, user?.Name, user?.Surname, user.Phpto, user.Online, this));
+                Dispatcher.Invoke(() => this.Content = new UserPage(user.Id, user?.Name, user?.Surname, user.Status, user.Phpto, user.DateOfBith, user.Online, user.Login, this));
 
             }
         }

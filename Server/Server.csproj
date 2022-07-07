@@ -10,28 +10,35 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="NewFolder\**" />
-    <EmbeddedResource Remove="NewFolder\**" />
-    <None Remove="NewFolder\**" />
-    <Page Remove="NewFolder\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Compile Include="AddDbContext.cs" />
     <Compile Include="App.xaml.cs" />
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="ClientConnect.cs" />
     <Compile Include="ClientOperations.cs" />
+    <Compile Include="Commands\AddBook.cs" />
     <Compile Include="Commands\AddComent.cs" />
+    <Compile Include="Commands\AddLibrary.cs" />
     <Compile Include="Commands\AddPost.cs" />
     <Compile Include="Commands\Check.cs" />
+    <Compile Include="Commands\ChekBook.cs" />
+    <Compile Include="Commands\DeleteBook.cs" />
+    <Compile Include="Commands\DeleteComment.cs" />
+    <Compile Include="Commands\Exit.cs" />
+    <Compile Include="Commands\FreandPage.cs" />
+    <Compile Include="Commands\LineBlog.cs" />
     <Compile Include="Commands\Login.cs" />
     <Compile Include="Commands\Online.cs" />
+    <Compile Include="Commands\OnlineBook.cs" />
+    <Compile Include="Commands\OnlineFreands.cs" />
     <Compile Include="Commands\Reaction.cs" />
     <Compile Include="Commands\Registration.cs" />
     <Compile Include="Commands\Remove.cs" />
+    <Compile Include="Commands\RemoveLibrary.cs" />
     <Compile Include="Commands\Search.cs" />
+    <Compile Include="Commands\SearchBook.cs" />
     <Compile Include="Commands\Subscription.cs" />
+    <Compile Include="Commands\UnSubscription.cs" />
+    <Compile Include="Commands\Update.cs" />
     <Compile Include="MainWindow.xaml.cs" />
     <Compile Include="Migrations\20220503182031_Update.cs" />
     <Compile Include="Migrations\20220503182031_Update.Designer.cs" />
@@ -43,6 +50,16 @@
     <Compile Include="Migrations\20220507100955_online.Designer.cs" />
     <Compile Include="Migrations\20220507145635_Sub.cs" />
     <Compile Include="Migrations\20220507145635_Sub.Designer.cs" />
+    <Compile Include="Migrations\20220515071116_book.cs" />
+    <Compile Include="Migrations\20220515071116_book.Designer.cs" />
+    <Compile Include="Migrations\20220516061330_null.cs" />
+    <Compile Include="Migrations\20220516061330_null.Designer.cs" />
+    <Compile Include="Migrations\20220524105614_Status.cs" />
+    <Compile Include="Migrations\20220524105614_Status.Designer.cs" />
+    <Compile Include="Migrations\20220528121118_SubBook.cs" />
+    <Compile Include="Migrations\20220528121118_SubBook.Designer.cs" />
+    <Compile Include="Migrations\20220707154441_PassHesh.cs" />
+    <Compile Include="Migrations\20220707154441_PassHesh.Designer.cs" />
     <Compile Include="Migrations\AddDbContextModelSnapshot.cs" />
   </ItemGroup>
 
@@ -68,6 +85,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\LibProtocol\LibProtocol.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="img\" />
   </ItemGroup>
 
 </Project>

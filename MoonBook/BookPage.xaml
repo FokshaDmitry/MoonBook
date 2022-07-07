@@ -1,0 +1,97 @@
+﻿<Grid x:Class="MoonBook.BookPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:MoonBook"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800" Background="#FF433C79">
+      <FlowDocumentReader x:Name="BookText" Margin="195,33,0,0" Foreground="Black" SelectionBrush="#FF2C8BD6" Background="{x:Null}" MinWidth="550" MinHeight="360" HorizontalAlignment="Left" VerticalAlignment="Top" Width="595">
+          <FlowDocumentReader.BorderBrush>
+              <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                  <GradientStop Color="Black"/>
+                  <GradientStop Color="Black" Offset="1"/>
+              </LinearGradientBrush>
+          </FlowDocumentReader.BorderBrush>
+          <FlowDocument x:Name="PageText">
+              <Paragraph x:Name="p1" TextIndent="14" >
+              </Paragraph>
+          </FlowDocument>
+      </FlowDocumentReader>
+      <TextBlock HorizontalAlignment="Left" Margin="15,208,0,0" TextWrapping="Wrap" Text="My Books" VerticalAlignment="Top" Foreground="Black" Background="#FF24222E" FontWeight="Bold" Height="18" Width="180"/>
+      <ListBox SelectionChanged="MyListBook_SelectionChanged" x:Name="MyListBook" Margin="15,226,0,0" Background="{x:Null}" BorderBrush="Black" Width="180" Height="171" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+      <TextBlock HorizontalAlignment="Left" Margin="16,28,0,0" TextWrapping="Wrap" Text="Library" VerticalAlignment="Top" Foreground="Black" Background="#FF1B1B22" Height="18" Width="180" FontWeight="Bold"/>
+      <ListBox x:Name="Library" SelectionChanged="Library_SelectionChanged" Margin="15,46,0,0" Background="{x:Null}" BorderBrush="Black" Width="180" Height="162" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+      <ToolBar HorizontalAlignment="Left" Height="28" Margin="196,0,0,0" MinWidth="547" Background="#FF24222E" VerticalAlignment="Top" Width="594">
+          <Button Click="Normal_Click" ToolTip="Bold">
+              <TextBlock FontWeight="Bold" Foreground="Black" Margin="5,0,0,0">N</TextBlock>
+          </Button>
+          <Button Click="Bold_Click" ToolTip="Bold">
+              <TextBlock FontWeight="Bold" Foreground="Black" Margin="5,0,0,0">B</TextBlock>
+          </Button>
+          <Button Click="Italic_Click" ToolTip="Italic" Foreground="Black">
+              <TextBlock FontStyle="Italic" FontWeight="Bold" Margin="5,0,0,0">I</TextBlock>
+          </Button>
+          <Menu Height="15"  VerticalAlignment="Center" Width="15" HorizontalAlignment="Center">
+              <Menu.Background>
+                  <ImageBrush ImageSource="/img/expand_FILL0_wght400_GRAD0_opsz48.png"/>
+              </Menu.Background>
+              <MenuItem x:Name="Interval" Height="15" Width="15" Foreground="{x:Null}">
+                  <MenuItem Header="1" Click="Interval_Click"></MenuItem>
+                  <MenuItem Header="1,5" Click="Interval_Click1"/>
+                  <MenuItem Header="2" Click="Interval_Click2"></MenuItem>
+              </MenuItem>
+          </Menu>
+          <Button Click="TextLeft_Click" ToolTip="Align Left" Height="15" Width="15" Margin="5,0,0,0">
+              <Button.Background>
+                  <ImageBrush ImageSource="/img/format_align_left_FILL0_wght400_GRAD0_opsz48.png"/>
+              </Button.Background>
+          </Button>
+          <Button Click="TextCenter_Click" Width="15" Height="15" Margin="5,0,-3,0" >
+              <Button.Background>
+                  <ImageBrush ImageSource="/img/format_align_center_FILL0_wght400_GRAD0_opsz48.png"/>
+              </Button.Background>
+          </Button>
+          <Button Click="TextRight_click" ToolTip="Align Right" Height="15" Width="15" Margin="5,0,0,0">
+              <Button.Background>
+                  <ImageBrush ImageSource="/img/format_align_right_FILL0_wght400_GRAD0_opsz48.png"/>
+              </Button.Background>
+          </Button>
+          <Button Click="TextLustify_Click" ToolTip="Align Justify" Height="15" Width="15" Margin="5,0,0,0">
+              <Button.Background>
+                  <ImageBrush ImageSource="/img/format_align_justify_FILL0_wght400_GRAD0_opsz48.png"/>
+              </Button.Background>
+          </Button>
+          <Button Click="White_cck" HorizontalAlignment="Center" VerticalAlignment="Center" Background="White" BorderBrush="#FF040404" Width="15" Height="15" Margin="5,0,0,0">
+              <Button.Template>
+                  <ControlTemplate  TargetType="Button">
+                      <Grid>
+                          <Ellipse Fill="White" Stroke="Black"></Ellipse>
+                          <Label Content="{TemplateBinding Content}" HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"></Label>
+                      </Grid>
+                  </ControlTemplate>
+              </Button.Template>
+          </Button>
+          <Button Click="Black_Click" HorizontalAlignment="Left" Background="White" BorderBrush="#FF040404" Width="19" Height="16" Margin="5,0,0,0">
+              <Button.Template>
+                  <ControlTemplate  TargetType="Button">
+                      <Grid>
+                          <Ellipse Fill="Black" Stroke="White" Width="15" Height="15" HorizontalAlignment="Center" VerticalAlignment="Center"></Ellipse>
+                          <Label Content="{TemplateBinding Content}" HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"></Label>
+                      </Grid>
+                  </ControlTemplate>
+              </Button.Template>
+          </Button>
+          <ComboBox IsEditable="True" x:Name="ComboText" HorizontalAlignment="Center" VerticalAlignment="Center" Width="141" Background="{x:Null}" BorderBrush="Black" Foreground="{DynamicResource {x:Static SystemColors.ActiveCaptionBrushKey}}" Margin="5,0,1,0" SelectionChanged="ComboText_SelectionChanged"/>
+          <Button x:Name="AddBookLibrary" HorizontalAlignment="Center" VerticalAlignment="Center" Width="20" Height="20" Click="AddBookLibrary_Click" Background="{x:Null}" />
+      
+      </ToolBar>
+      <TextBox x:Name="SeachBook" Margin="15,4,0,0" TextWrapping="Wrap" Width="160" BorderBrush="Black" Background="{x:Null}" Foreground="White" Height="20" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+      <Button Click="SearchBook_Click" Foreground="{x:Null}" Height="20" Width="20" BorderBrush="Black" Margin="175,4,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" >
+          <Button.Background>
+              <ImageBrush ImageSource="/img/search_FILL0_wght400_GRAD0_opsz48.png"/>
+          </Button.Background>
+      </Button>
+</Grid>

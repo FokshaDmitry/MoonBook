@@ -1,0 +1,16 @@
+﻿<Grid x:Class="MoonBook.FreandUser"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:MoonBook"
+      mc:Ignorable="d" 
+      d:DesignHeight="40" d:DesignWidth="40">
+    <Ellipse x:Name="Photo" HorizontalAlignment="Center" Height="40" Stroke="Black" VerticalAlignment="Center" Width="40">
+        <Ellipse.Fill>
+            <ImageBrush ImageSource="/img/android_contacts_FILL0_wght400_GRAD0_opsz48.png"/>
+        </Ellipse.Fill>
+    </Ellipse>
+    <Ellipse x:Name="Online" HorizontalAlignment="Right" Height="16" Margin="0,24,0,0" Stroke="Black" VerticalAlignment="Top" Width="15" />
+
+</Grid>

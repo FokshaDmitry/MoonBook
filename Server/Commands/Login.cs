@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,11 +10,13 @@ namespace Server.Commands
     public class Login
     {
         LibProtocol.Models.User data;
+        LibProtocol.Services.Hasher _hasher;
         AddDbContext add;
         public Login(LibProtocol.Models.User data)
         {
             this.data = data;
             add = new AddDbContext();
+            _hasher = new LibProtocol.Services.Hasher();
         }
 
         public LibProtocol.Response buildResponce(ref LibProtocol.Response response)
@@ -28,20 +31,38 @@ namespace Server.Commands
                     return response;
 
                 }
-
-                foreach (var item in add.Users)
+                var item = add.Users.Where(u => u.Login == data.Login).FirstOrDefault();
+                if (item != null)
                 {
-                    if (item.Login == data.Login && item.Password == data.Password)
+                    byte[]? img = null;
+                    if (!String.IsNullOrEmpty(item.PhotoName))
+                    {
+                        img = File.ReadAllBytes("./img/" + item.PhotoName + ".img");
+                    }
+                    String PassSalt = _hasher.heshString(data.Password + item.PassSalt);
+                    if (item.Login == data.Login && item.Password == PassSalt)
                     {
                         item.Online = true;
                         add.Users.Update(item);
-                        response.data = new LibProtocol.Models.User { Id = item.Id, Name = item.Name, Surname = item.Surname, Phpto = item.Phpto, Online = item.Online };
+                        response.data = new LibProtocol.Models.User { Id = item.Id, Name = item.Name, Surname = item.Surname, Phpto = img, Online = item.Online, Login = item.Login, DateOfBith = item.DateOfBith, Status = item.Status };
                         response.succces = true;
                         response.code = LibProtocol.ResponseCode.Ok;
                         response.StatusTxt = "Login Ok";
-                        break;
+                    }
+                    else
+                    {
+                        response.succces = false;
+                        response.code = LibProtocol.ResponseCode.Error;
+                        response.StatusTxt = "Wrong login or password";
                     }
                 }
+                else
+                {
+                    response.succces = false;
+                    response.code = LibProtocol.ResponseCode.Error;
+                    response.StatusTxt = "User don't found";
+                }
+                
             }
             catch (Exception)
             {

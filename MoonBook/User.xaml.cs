@@ -25,13 +25,17 @@ namespace MoonBook
         public Guid IdFreand;
         BitmapImage imgsource;
         ServerConnect server;
-        public User(Guid IdUser, string Name, byte[] Photo, bool Online, bool Follow, Guid IdFreand)
+        public bool freand;
+        FreandPageLogic page;
+        public User(Guid IdUser, string Name, byte[] Photo, bool Online, bool Follow, Guid IdFreand, FreandPageLogic page)
         {
             InitializeComponent();
             this.IdUser = IdUser;
             this.IdFreand = IdFreand;
             this.Name.Text = Name;
             imgsource = new BitmapImage();
+            freand = Follow;
+            this.page = page;
             if (Photo != null)
             {
                 imgsource.BeginInit();
@@ -41,15 +45,27 @@ namespace MoonBook
             }
             if (Online) this.Online.Fill = System.Windows.Media.Brushes.LightGreen;
             else this.Online.Fill = System.Windows.Media.Brushes.LightGray;
-            if (Follow) this.Follow.Background = new ImageBrush(new BitmapImage(new Uri(@"MoonBook\person_add_FILL0_wght400_GRAD0_opsz48.png", UriKind.Relative)));
-            else this.Follow.Background = new ImageBrush(new BitmapImage(new Uri(@"MoonBook\person_remove_FILL0_wght400_GRAD0_opsz48.png", UriKind.Relative)));
+            if (Follow) this.Follow.Background = new ImageBrush(new BitmapImage(new Uri("person_remove_FILL0_wght400_GRAD0_opsz48.png", UriKind.RelativeOrAbsolute)));
+            else this.Follow.Background = new ImageBrush(new BitmapImage(new Uri("person_add_FILL0_wght400_GRAD0_opsz48.png", UriKind.RelativeOrAbsolute)));
             server = new ServerConnect();
         }
 
         private void Follow_Click(object sender, RoutedEventArgs e)
         {
             server.Connect();
-            server.Subscribe(IdUser, IdFreand);
+            if (freand)
+            {
+                server.UnSubscribe(IdUser, IdFreand);
+                this.Follow.Background = new ImageBrush(new BitmapImage(new Uri("person_remove_FILL0_wght400_GRAD0_opsz48.png", UriKind.RelativeOrAbsolute)));
+                page.OnlineFreands();
+            }
+            else
+            {
+                server.Subscribe(IdUser, IdFreand);
+                this.Follow.Background = new ImageBrush(new BitmapImage(new Uri("person_add_FILL0_wght400_GRAD0_opsz48.png", UriKind.RelativeOrAbsolute)));
+                page.OnlineFreands();
+            }
+
         }
     }
 }

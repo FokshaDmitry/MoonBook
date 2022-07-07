@@ -15,6 +15,8 @@ namespace Server
         public DbSet<LibProtocol.Models.Comments> Comments { get; set; }
         public DbSet<LibProtocol.Models.Reactions> Reactions { get; set; }
         public DbSet<LibProtocol.Models.Subscriptions> Subscriptions { get; set; }
+        public DbSet<LibProtocol.Models.Books> Books { get; set; }
+        public DbSet<LibProtocol.Models.SubBook> SubBooks { get; set; }
         public AddDbContext()
         { 
             Database.EnsureCreated();

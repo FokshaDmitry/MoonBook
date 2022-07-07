@@ -9,9 +9,11 @@ namespace LibProtocol
     [Serializable]
     public class Online
     {
-        public List<LibProtocol.Models.Posts> posts { get; set; }
-        public List<LibProtocol.Models.User> users { get; set; }
-        public List<LibProtocol.Models.Comments> comments { get; set; }
-        public List<LibProtocol.Models.Subscriptions> subscriptions { get; set; }
+        public List<LibProtocol.Models.Posts>? posts { get; set; }
+        public List<LibProtocol.Models.User>? users { get; set; }
+        public List<LibProtocol.Models.Comments>? comments { get; set; }
+        public List<LibProtocol.Models.Subscriptions>? subscriptions { get; set; }
+        public List<LibProtocol.Models.Books>? books { get; set; }
+        public List<LibProtocol.Models.SubBook>? subBook { get; set; }
     }
 }

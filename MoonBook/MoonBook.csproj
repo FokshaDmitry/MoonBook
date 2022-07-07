@@ -9,12 +9,27 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="add_FILL0_wght500_GRAD0_opsz48.png" />
     <None Remove="android_contacts_FILL0_wght400_GRAD0_opsz48.png" />
     <None Remove="auto_stories_FILL0_wght400_GRAD0_opsz48.png" />
     <None Remove="delete_FILL0_wght400_GRAD0_opsz48.png" />
+    <None Remove="done_FILL0_wght400_GRAD0_opsz48.png" />
+    <None Remove="drive_file_rename_outline_FILL0_wght400_GRAD0_opsz48.png" />
+    <None Remove="expand_FILL0_wght400_GRAD0_opsz48.png" />
+    <None Remove="format_align_center_FILL0_wght400_GRAD0_opsz48.png" />
+    <None Remove="format_align_justify_FILL0_wght400_GRAD0_opsz48.png" />
+    <None Remove="format_align_left_FILL0_wght400_GRAD0_opsz48.png" />
+    <None Remove="format_align_right_FILL0_wght400_GRAD0_opsz48.png" />
     <None Remove="image_FILL0_wght400_GRAD0_opsz48.png" />
+    <None Remove="Img\android_contacts_FILL0_wght400_GRAD0_opsz48.png" />
+    <None Remove="Img\auto_stories_FILL0_wght400_GRAD0_opsz48.png" />
+    <None Remove="Img\import_contacts_FILL0_wght400_GRAD0_opsz48.png" />
+    <None Remove="Img\library_books_FILL0_wght400_GRAD0_opsz48.png" />
+    <None Remove="Img\location_automation_FILL0_wght400_GRAD0_opsz48.png" />
+    <None Remove="Img\send_FILL0_wght400_GRAD0_opsz48.png" />
     <None Remove="import_contacts_FILL0_wght400_GRAD0_opsz48.png" />
     <None Remove="library_books_FILL0_wght400_GRAD0_opsz48.png" />
+    <None Remove="local_library_FILL0_wght500_GRAD0_opsz48.png" />
     <None Remove="location_automation_FILL0_wght400_GRAD0_opsz48.png" />
     <None Remove="M.png" />
     <None Remove="mood_bad_FILL0_wght400_GRAD0_opsz48.png" />
@@ -22,6 +37,11 @@
     <None Remove="search_FILL0_wght400_GRAD0_opsz48.png" />
     <None Remove="send_FILL0_wght400_GRAD0_opsz48.png" />
     <None Remove="title_FILL0_wght400_GRAD0_opsz48.png" />
+    <None Remove="UserPage.xaml.cs~RF5d3e3d4.TMP" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="EpubSharp.dll" Version="1.1.5" />
   </ItemGroup>
 
   <ItemGroup>
@@ -29,19 +49,28 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="android_contacts_FILL0_wght400_GRAD0_opsz48.png" />
-    <Resource Include="auto_stories_FILL0_wght400_GRAD0_opsz48.png" />
-    <Resource Include="delete_FILL0_wght400_GRAD0_opsz48.png" />
-    <Resource Include="image_FILL0_wght400_GRAD0_opsz48.png" />
-    <Resource Include="import_contacts_FILL0_wght400_GRAD0_opsz48.png" />
-    <Resource Include="library_books_FILL0_wght400_GRAD0_opsz48.png" />
-    <Resource Include="location_automation_FILL0_wght400_GRAD0_opsz48.png" />
-    <Resource Include="M.png" />
-    <Resource Include="mood_bad_FILL0_wght400_GRAD0_opsz48.png" />
-    <Resource Include="mood_FILL0_wght400_GRAD0_opsz48.png" />
-    <Resource Include="search_FILL0_wght400_GRAD0_opsz48.png" />
-    <Resource Include="send_FILL0_wght400_GRAD0_opsz48.png" />
-    <Resource Include="title_FILL0_wght400_GRAD0_opsz48.png" />
+    <Resource Include="Img\add_FILL0_wght500_GRAD0_opsz48.png" />
+    <Resource Include="Img\android_contacts_FILL0_wght400_GRAD0_opsz48.png" />
+    <Resource Include="Img\auto_stories_FILL0_wght400_GRAD0_opsz48.png" />
+    <Resource Include="Img\delete_FILL0_wght400_GRAD0_opsz48.png" />
+    <Resource Include="Img\done_FILL0_wght400_GRAD0_opsz48.png" />
+    <Resource Include="Img\drive_file_rename_outline_FILL0_wght400_GRAD0_opsz48.png" />
+    <Resource Include="Img\expand_FILL0_wght400_GRAD0_opsz48.png" />
+    <Resource Include="Img\format_align_center_FILL0_wght400_GRAD0_opsz48.png" />
+    <Resource Include="Img\format_align_justify_FILL0_wght400_GRAD0_opsz48.png" />
+    <Resource Include="Img\format_align_left_FILL0_wght400_GRAD0_opsz48.png" />
+    <Resource Include="Img\format_align_right_FILL0_wght400_GRAD0_opsz48.png" />
+    <Resource Include="Img\image_FILL0_wght400_GRAD0_opsz48.png" />
+    <Resource Include="Img\import_contacts_FILL0_wght400_GRAD0_opsz48.png" />
+    <Resource Include="Img\library_books_FILL0_wght400_GRAD0_opsz48.png" />
+    <Resource Include="Img\location_automation_FILL0_wght400_GRAD0_opsz48.png" />
+    <Resource Include="Img\send_FILL0_wght400_GRAD0_opsz48.png" />
+    <Resource Include="Img\local_library_FILL0_wght500_GRAD0_opsz48.png" />
+    <Resource Include="Img\M.png" />
+    <Resource Include="Img\mood_bad_FILL0_wght400_GRAD0_opsz48.png" />
+    <Resource Include="Img\mood_FILL0_wght400_GRAD0_opsz48.png" />
+    <Resource Include="Img\search_FILL0_wght400_GRAD0_opsz48.png" />
+    <Resource Include="Img\title_FILL0_wght400_GRAD0_opsz48.png" />
   </ItemGroup>
 
   <ItemGroup>

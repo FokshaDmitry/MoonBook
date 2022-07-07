@@ -22,6 +22,32 @@ namespace Server.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
+            modelBuilder.Entity("LibProtocol.Models.Books", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Author")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("CoverImage")
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("TextContent")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid?>("idUser")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Books");
+                });
+
             modelBuilder.Entity("LibProtocol.Models.Comments", b =>
                 {
                     b.Property<Guid>("Id")
@@ -97,6 +123,23 @@ namespace Server.Migrations
                     b.ToTable("Reactions");
                 });
 
+            modelBuilder.Entity("LibProtocol.Models.SubBook", b =>
+                {
+                    b.Property<Guid?>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("idBook")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("idUser")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("SubBooks");
+                });
+
             modelBuilder.Entity("LibProtocol.Models.Subscriptions", b =>
                 {
                     b.Property<Guid>("Id")
@@ -132,11 +175,17 @@ namespace Server.Migrations
                     b.Property<bool>("Online")
                         .HasColumnType("bit");
 
+                    b.Property<string>("PassSalt")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Password")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<byte[]>("Phpto")
                         .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("Status")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Surname")
                         .HasColumnType("nvarchar(max)");

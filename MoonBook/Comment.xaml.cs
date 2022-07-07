@@ -23,7 +23,9 @@ namespace MoonBook
     {
         Guid IdPost;
         Guid IdUser;
-        public Comment(string name, DateTime date, byte[] photo, string text, Guid idpost, Guid iduser)
+        Guid Id;
+        ServerConnect server;
+        public Comment(Guid id, string name, DateTime date, byte[] photo, string text, Guid idpost, Guid iduser)
         {
             InitializeComponent();
             NameComment.Text = name;
@@ -31,6 +33,8 @@ namespace MoonBook
             TextComment.Text = text;
             IdPost = idpost;
             IdUser = iduser;
+            Id = id;
+            server = new ServerConnect();
             if (photo != null)
             {
                 BitmapImage imgsource = new BitmapImage();
@@ -39,6 +43,12 @@ namespace MoonBook
                 imgsource.EndInit();
                 PhotoComent.Fill = new ImageBrush(imgsource);
             }
+        }
+
+        private void DeliteComment_Click(object sender, RoutedEventArgs e)
+        {
+            server.Connect();
+            server.DeleteComment(Id);
         }
     }
 }

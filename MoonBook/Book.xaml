@@ -1,0 +1,14 @@
+﻿<Grid x:Class="MoonBook.Book"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:MoonBook"
+      mc:Ignorable="d">
+    <Rectangle Width="60" Height="70" x:Name="Imege">
+        <Rectangle.Fill>
+            <ImageBrush ImageSource="/img/local_library_FILL0_wght500_GRAD0_opsz48.png"/>
+        </Rectangle.Fill>
+
+    </Rectangle>
+</Grid>

@@ -19,6 +19,8 @@ namespace Server.CommandServer
             online.posts = new List<LibProtocol.Models.Posts>();
             online.users = new List<LibProtocol.Models.User>();
             online.comments = new List<LibProtocol.Models.Comments>();
+            online.books = new List<LibProtocol.Models.Books>();
+            online.subscriptions = new List<LibProtocol.Models.Subscriptions>();
             IdP = new List<Guid>();
             add = new AddDbContext();
         }
@@ -36,10 +38,19 @@ namespace Server.CommandServer
                 {
                     foreach (var comment in add.Comments.Where(c => c.idPost == id))
                     {
-                        online.comments.Add(comment);
+                        online?.comments.Add(comment);
                     }
                 }
-                response.data = new LibProtocol.Online { posts = online.posts, comments = online.comments, users = online.users };
+                foreach (var book in add.Books.Where(b => b.idUser == id))
+                {
+                    online.books.Add(book);
+                }
+                foreach (var users in add.Subscriptions.Where(s => s.IdUser == id).Join(add.Users, s => s.IdFreand, u => u.Id, (s, u) => new {Sub = s, User = u}))
+                {
+                    online.subscriptions.Add(users.Sub);
+                    online.users.Add(users.User);
+                }
+                response.data = new LibProtocol.Online { posts = online.posts, comments = online.comments, users = online.users, books = online.books, subscriptions = online.subscriptions };
                 response.succces = true;
                 response.code = LibProtocol.ResponseCode.Ok;
             }
