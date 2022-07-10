@@ -13,12 +13,14 @@ namespace LibProtocol.Models
         public Guid Id { get; set; }
         public String? Name { get; set; }
         public String? Surname { get; set; }
+        public String? Email { get; set; }
         public String? Status { get; set; }
         public DateTime DateOfBith { get; set; }
         public String? Login { get; set; }
         public String? Password { get; set; }
         public String? PassSalt { get; set; }
         public String? PhotoName { get; set; }
+        public DateTime? RegMoment { get; set; }
         public bool Online { get; set; }
         [NotMapped]
         public byte[]? Phpto { get; set; }

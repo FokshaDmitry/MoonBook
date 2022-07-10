@@ -43,6 +43,7 @@ namespace Server.Commands
                 {
                     stream.Write(data.Phpto, 0, data.Phpto.Length);
                 }
+                data.RegMoment = DateTime.Now;
                 data.PhotoName = photoName;
                 data.PassSalt = _hasher.heshString(DateTime.Now.ToString());
                 data.Password = _hasher.heshString(data.Password + data.PassSalt);

@@ -37,11 +37,11 @@ namespace MoonBook
                 onError?.Invoke(ex.Message);
             }
         }
-        public void newAccaunt(string name, string surname, DateTime date, string login, string password, byte[] photo)
+        public void newAccaunt(string name, string surname, DateTime date, string email, string login, string password, byte[] photo)
         {
             LibProtocol.Request request = new LibProtocol.Request();
             request.command = LibProtocol.Command.Registration;
-            request.data = new LibProtocol.Models.User { Id = Guid.NewGuid(), Name = name, Surname = surname, DateOfBith = date, Login = login, Password = password, Phpto = photo };
+            request.data = new LibProtocol.Models.User { Id = Guid.NewGuid(), Name = name, Email = email, Surname = surname, DateOfBith = date, Login = login, Password = password, Phpto = photo };
             try
             {
                 bf.Serialize(stream, request);
