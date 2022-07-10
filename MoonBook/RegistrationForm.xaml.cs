@@ -72,6 +72,16 @@ namespace MoonBook
                 MessageBox.Show("Enter Date");
                 return;
             }
+            if (Dispatcher.Invoke(() => LogEmail.Text) == "")
+            {
+                MessageBox.Show("Enter Email");
+                return;
+            }
+            if(Dispatcher.Invoke(() => LogEmail.Text.Contains("@") && LogEmail.Text.Contains('.')))
+            {
+                MessageBox.Show("Invalid email address");
+                return;
+            }
             if (Dispatcher.Invoke(() => LogLogin.Text) == "")
             {
                 MessageBox.Show("Enter Login");
@@ -93,7 +103,7 @@ namespace MoonBook
                 return;
             }
             server.Connect();
-            Dispatcher.Invoke(()=>server.newAccaunt(LogName.Text, LogSurname.Text, LogDate.DisplayDate, LogLogin.Text, LogPass.Password, Photo));
+            Dispatcher.Invoke(()=>server.newAccaunt(LogName.Text, LogSurname.Text, LogDate.DisplayDate, LogEmail.Text, LogLogin.Text, LogPass.Password, Photo));
             server.waitResponse((res)=> 
             {
                 if(res.succces)

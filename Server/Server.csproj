@@ -60,6 +60,8 @@
     <Compile Include="Migrations\20220528121118_SubBook.Designer.cs" />
     <Compile Include="Migrations\20220707154441_PassHesh.cs" />
     <Compile Include="Migrations\20220707154441_PassHesh.Designer.cs" />
+    <Compile Include="Migrations\20220710133149_Email.cs" />
+    <Compile Include="Migrations\20220710133149_Email.Designer.cs" />
     <Compile Include="Migrations\AddDbContextModelSnapshot.cs" />
   </ItemGroup>
 

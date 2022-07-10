@@ -13,21 +13,23 @@
         <TextBox HorizontalAlignment="Left" Margin="167,199,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="142" x:Name="LogSurname"/>
         <TextBlock HorizontalAlignment="Left" Margin="121,165,0,0" TextWrapping="Wrap" Text="Name:" VerticalAlignment="Top"/>
         <TextBlock HorizontalAlignment="Left" Margin="105,200,0,0" TextWrapping="Wrap" Text="Surname:" VerticalAlignment="Top"/>
-        <DatePicker HorizontalAlignment="Left" Margin="167,231,0,0" VerticalAlignment="Top" Width="142" x:Name="LogDate"/>
-        <TextBlock HorizontalAlignment="Left" Margin="70,235,0,0" TextWrapping="Wrap" Text="Date of Bithday:" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="123,274,0,0" TextWrapping="Wrap" Text="Login:" VerticalAlignment="Top"/>
-        <TextBox HorizontalAlignment="Left" Margin="169,273,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="143" x:Name="LogLogin"/>
-        <TextBlock HorizontalAlignment="Left" Margin="102,312,0,0" TextWrapping="Wrap" Text="Password:" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="53,350,0,0" TextWrapping="Wrap" Text="Confirm password: " VerticalAlignment="Top"/>
-        <Button Content="Cancel" HorizontalAlignment="Left" Margin="269,390,0,0" VerticalAlignment="Top" Click="Button_Click_2" IsCancel="True" x:Name="Cancel"/>
-        <Button Content="Login" HorizontalAlignment="Left" Margin="221,390,0,0" VerticalAlignment="Top" Click="Button_Click"/>
-        <PasswordBox HorizontalAlignment="Left" Margin="169,310,0,0" VerticalAlignment="Top" Width="140" x:Name="LogPass"/>
-        <PasswordBox HorizontalAlignment="Left" Margin="169,348,0,0" VerticalAlignment="Top" Width="140" x:Name="LogConPass"/>
+        <DatePicker HorizontalAlignment="Left" Margin="167,265,0,0" VerticalAlignment="Top" Width="142" x:Name="LogDate"/>
+        <TextBlock HorizontalAlignment="Left" Margin="125,233,0,0" TextWrapping="Wrap" Text="Email:" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="71,273,0,0" TextWrapping="Wrap" Text="Date of Bithday:" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="123,308,0,0" TextWrapping="Wrap" Text="Login:" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Margin="170,306,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" x:Name="LogLogin"/>
+        <TextBlock HorizontalAlignment="Left" Margin="102,343,0,0" TextWrapping="Wrap" Text="Password:" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="54,377,0,0" TextWrapping="Wrap" Text="Confirm password: " VerticalAlignment="Top"/>
+        <Button Content="Cancel" HorizontalAlignment="Left" Margin="268,410,0,0" VerticalAlignment="Top" Click="Button_Click_2" IsCancel="True" x:Name="Cancel"/>
+        <Button Content="Login" HorizontalAlignment="Left" Margin="220,410,0,0" VerticalAlignment="Top" Click="Button_Click"/>
+        <PasswordBox HorizontalAlignment="Left" Margin="170,341,0,0" VerticalAlignment="Top" Width="138" x:Name="LogPass"/>
+        <PasswordBox HorizontalAlignment="Left" Margin="170,375,0,0" VerticalAlignment="Top" Width="139" x:Name="LogConPass"/>
         <Ellipse HorizontalAlignment="Left" Height="140" Margin="167,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="140" x:Name="Elips">
             <Ellipse.Fill>
                 <ImageBrush ImageSource="/img/android_contacts_FILL0_wght400_GRAD0_opsz48.png"/>
             </Ellipse.Fill>
         </Ellipse>
+        <TextBox HorizontalAlignment="Left" Margin="167,231,0,0" TextWrapping="Wrap" x:Name="LogEmail" VerticalAlignment="Top" Width="143"/>
 
 
     </Grid>
