@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
-namespace MoonBook
+namespace MoonBook.Logic
 {
     public class FreandPageLogic : FreandPage
     {

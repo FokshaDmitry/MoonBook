@@ -26,7 +26,7 @@ namespace MoonBook
         public Guid Id;
         public Guid IdUser;
         ServerConnect server;
-        public Post(string name, byte[] photo, string text, string title, byte[] img, DateTime date, int like, int dislike, Guid IdPost, Guid iduser, LibProtocol.Online online)
+        public Post(string name, byte[] photo, string text, string title, string img, DateTime date, int like, int dislike, Guid IdPost, Guid iduser, LibProtocol.Online online)
         {
             InitializeComponent();
             Name.Text = name;
@@ -38,14 +38,6 @@ namespace MoonBook
             IdUser = iduser;
             Id = IdPost;
             server = new ServerConnect();
-            if (img != null)
-            {
-                BitmapImage imgsource = new BitmapImage();
-                imgsource.BeginInit();
-                imgsource.StreamSource = new MemoryStream(img);
-                imgsource.EndInit();
-                Image.Source = imgsource;
-            }
             if (photo != null)
             {
                 BitmapImage imgsource = new BitmapImage();

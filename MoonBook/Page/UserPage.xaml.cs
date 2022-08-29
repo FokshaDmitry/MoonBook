@@ -1,5 +1,6 @@
 ﻿using EpubSharp;
 using Microsoft.Win32;
+using MoonBook.Logic;
 using System;
 using System.Collections.Generic;
 using System.Drawing;

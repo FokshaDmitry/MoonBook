@@ -6,18 +6,18 @@ using System.Threading.Tasks;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
-namespace MoonBook
+namespace MoonBook.Logic
 {
     public class BookPageLogic : BookPage
     {
         public BookPageLogic(Guid idUser) : base(idUser)
         {
-            foreach (System.Windows.Media.FontFamily fontFamily in Fonts.SystemFontFamilies)
+            foreach (FontFamily fontFamily in Fonts.SystemFontFamilies)
             {
                 ComboText.Items.Add(fontFamily.Source);
             }
         }
-        public override void ReadBook(Guid idbook, String text)
+        public override void ReadBook(Guid idbook, string text)
         {
             server.Connect();
             server.Read(idUser, idbook);
@@ -46,7 +46,7 @@ namespace MoonBook
             string tmp = "";
             Dispatcher.Invoke(() => tmp = SeachBook.Text);
             server.Connect();
-            if (String.IsNullOrEmpty(tmp))
+            if (string.IsNullOrEmpty(tmp))
             {
                 server.OnlineBook(idUser);
                 server.waitResponse((res) => onlineLib = (LibProtocol.Online)res.data);
@@ -64,7 +64,7 @@ namespace MoonBook
                     }
                 });
             }
-            else if(!String.IsNullOrEmpty(tmp))
+            else if (!string.IsNullOrEmpty(tmp))
             {
                 server.SearchBook(tmp.Replace(" ", ""));
                 server.waitResponse((res) => onlineLib = (LibProtocol.Online)res.data);

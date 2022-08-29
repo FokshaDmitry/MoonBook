@@ -14,7 +14,7 @@
         </Ellipse>
         <Button Name="UpdatePhoto" HorizontalAlignment="Left" Margin="100,110,0,0" VerticalAlignment="Top" Width="15" Height="15" BorderBrush="{x:Null}" Click="UpdatePhoto_Click">
             <Button.Background>
-                <ImageBrush ImageSource="/drive_file_rename_outline_FILL0_wght400_GRAD0_opsz48.png"/>
+                <ImageBrush ImageSource="img/drive_file_rename_outline_FILL0_wght400_GRAD0_opsz48.png"/>
             </Button.Background>
         </Button>
         <TextBlock HorizontalAlignment="Left" Margin="133,52,0,0" TextWrapping="Wrap" Text="Name:" VerticalAlignment="Top"/>

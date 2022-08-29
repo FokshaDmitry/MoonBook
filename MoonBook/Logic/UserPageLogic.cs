@@ -101,7 +101,7 @@ namespace MoonBook
         {
             NewText.Text.Replace($">{title.ToUpper()}<", "");
             server.Connect();
-            server.addPost(idUser, Name.Text, title, NewText.Text, ImageByte);
+            server.addPost(idUser, Name.Text, title, NewText.Text, "");
             NewText.Text = "";
             Path.Text = "";
             title = "";

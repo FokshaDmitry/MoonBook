@@ -51,7 +51,7 @@ namespace MoonBook
                 onError?.Invoke(ex.Message);
             }
         }
-        public void addPost(Guid idU, string name, string title, string text, byte[] img)
+        public void addPost(Guid idU, string name, string title, string text, string img)
         {
             LibProtocol.Request request = new LibProtocol.Request();
             request.command = LibProtocol.Command.addPost;
