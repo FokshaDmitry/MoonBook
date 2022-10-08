@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,6 +22,12 @@ namespace Server.CommandServer
         {
             try
             {
+                String photoName = Guid.NewGuid().ToString();
+                using (FileStream stream = new FileStream("./img_post/" + photoName + ".png", FileMode.CreateNew))
+                {
+                    stream.Write(data.ImageMass, 0, data.ImageMass.Length);
+                }
+                data.Image = photoName + ".png";
                 add.Posts.Add(data);
                 add.SaveChanges();
                 response.succces = true;

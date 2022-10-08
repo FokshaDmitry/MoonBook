@@ -37,7 +37,7 @@ namespace Server.Commands
                     byte[]? img = null;
                     if (!String.IsNullOrEmpty(item.PhotoName))
                     {
-                        img = File.ReadAllBytes("./img/" + item.PhotoName + ".img");
+                        img = File.ReadAllBytes("./img/" + item.PhotoName);
                     }
                     String PassSalt = _hasher.heshString(data.Password + item.PassSalt);
                     if (item.Login == data.Login && item.Password == PassSalt)

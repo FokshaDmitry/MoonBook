@@ -38,7 +38,7 @@ namespace MoonBook
                 ListLineBlog.Items.Clear();
                 foreach (var post in onlineLib.posts.Join(onlineLib.users, p => p.IdUser, u => u.Id, (p, u) => new { pos = p, use = u }).Distinct())
                 {
-                    ListLineBlog.Items.Add(new Post($"{post.use.Name} {post.use.Surname}", post.use.Phpto, post.pos.Text, post.pos.Title, post.pos.Image, post.pos.Date, post.pos.Like, post.pos.Dislike, post.pos.Id, idUser, onlineLib));
+                    ListLineBlog.Items.Add(new Post($"{post.use.Name} {post.use.Surname}", post.use.Phpto, post.pos.Text, post.pos.Title, post.pos.ImageMass, post.pos.Date, post.pos.Like, post.pos.Dislike, post.pos.Id, idUser, onlineLib));
                 }
             });
         }

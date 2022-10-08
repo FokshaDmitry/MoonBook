@@ -38,14 +38,6 @@ namespace MoonBook
             IdUser = iduser;
             Id = IdPost;
             server = new ServerConnect();
-            if (img != null)
-            {
-                BitmapImage imgsource = new BitmapImage();
-                imgsource.BeginInit();
-                imgsource.StreamSource = new MemoryStream(img);
-                imgsource.EndInit();
-                Image.Source = imgsource;
-            }
             if (photo != null)
             {
                 BitmapImage imgsource = new BitmapImage();
@@ -53,6 +45,14 @@ namespace MoonBook
                 imgsource.StreamSource = new MemoryStream(photo);
                 imgsource.EndInit();
                 PostPhoto.Fill = new ImageBrush(imgsource);
+            }
+            if (img != null)
+            {
+                BitmapImage imgsource = new BitmapImage();
+                imgsource.BeginInit();
+                imgsource.StreamSource = new MemoryStream(img);
+                imgsource.EndInit();
+                Image.Source = imgsource;
             }
             foreach (var coment in online.comments.Where(c => c.idPost == Id).OrderByDescending(c => c.Date).Join(online.users, c => c.idUser, u => u.Id, (c, u) => new { comm = c, use = u }).Distinct())
             {

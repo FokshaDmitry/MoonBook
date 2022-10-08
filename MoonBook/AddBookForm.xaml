@@ -54,7 +54,7 @@
             <ListBoxItem>Metamodernism</ListBoxItem>
         </ListBox>
         <TextBlock HorizontalAlignment="Left" Margin="21,190,0,0" TextWrapping="Wrap" Text="Annotation:" VerticalAlignment="Top"/>
-        <TextBox x:Name="Anatation" HorizontalAlignment="Left" Margin="90,198,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="260" Height="83"/>
+        <TextBox x:Name="Anatation" HorizontalAlignment="Left" Margin="90,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="260" Height="83"/>
         <TextBox x:Name="Text" HorizontalAlignment="Left" Margin="90,288,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="260" Height="94"/>
         <TextBlock HorizontalAlignment="Left" Margin="21,288,0,0" TextWrapping="Wrap" Text="Text:" VerticalAlignment="Top"/>
 
