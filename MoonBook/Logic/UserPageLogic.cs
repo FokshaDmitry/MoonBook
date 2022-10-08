@@ -22,7 +22,11 @@ namespace MoonBook
 
         public UserPageLogic(Guid guid, string? name, string? surname, string status, byte[] photo, DateTime birthday, string login, UserPage main) : base(guid, name, surname, status, photo, birthday, login, main)
         {
-
+            openFileDialog1 = new OpenFileDialog()
+            {
+                Filter = "Image files (*.BMP, *.JPG, *.GIF, *.TIF, *.PNG, *.ICO, *.EMF, *.WMF)|*.bmp;*.jpg;*.gif; *.tif; *.png; *.ico; *.emf; *.wmf",
+                Title = "Open image file"
+            };
         }
         public override void OpenFileDialogForm()
         {
@@ -84,7 +88,7 @@ namespace MoonBook
                 FreandList.Items.Clear();
                 foreach (var post in onlineLib?.posts.Join(onlineLib.users, p => p.IdUser, u => u.Id, (p, u) => new { pos = p, use = u }).Distinct())
                 {
-                    VewPost.Items.Add(new Post($"{post.use.Name} {post.use.Surname}", post.use.Phpto, post.pos.Text, post.pos.Title, post.pos.Image, post.pos.Date, post.pos.Like, post.pos.Dislike, post.pos.Id, idUser, onlineLib));
+                    VewPost.Items.Add(new Post($"{post.use.Name} {post.use.Surname}", post.use.Phpto, post.pos.Text, post.pos.Title, post.pos.ImageMass, post.pos.Date, post.pos.Like, post.pos.Dislike, post.pos.Id, idUser, onlineLib));
                 }
                 foreach (var book in onlineLib.books)
                 {
@@ -101,7 +105,7 @@ namespace MoonBook
         {
             NewText.Text.Replace($">{title.ToUpper()}<", "");
             server.Connect();
-            server.addPost(idUser, Name.Text, title, NewText.Text, "");
+            server.addPost(idUser, title, NewText.Text, ImageByte);
             NewText.Text = "";
             Path.Text = "";
             title = "";

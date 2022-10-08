@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,9 +25,13 @@ namespace Server.Commands
         {
             try
             {
-                foreach (var item in add.Subscriptions.Where(s => s.IdUser == data).Join(add.Users, s => s.IdFreand, u => u.Id, (s, u) => new {Sub = s, User = u}))
-                { 
-                        online.users.Add(item.User);
+                foreach (var user in add.Subscriptions.Where(s => s.IdUser == data).Join(add.Users, s => s.IdFreand, u => u.Id, (s, u) => new {Sub = s, User = u}).Select(u => u.User))
+                {
+                    if (!String.IsNullOrEmpty(user.PhotoName))
+                    {
+                        user.Phpto = File.ReadAllBytes("./img/" + user.PhotoName);
+                    }
+                    online.users.Add(user);
                 }
                 response.data = online;
                 response.succces = true;
@@ -39,8 +44,6 @@ namespace Server.Commands
                 response.StatusTxt = "Wrong Search";
                 return response;
             }
-
-            
             return response;
         }
     }

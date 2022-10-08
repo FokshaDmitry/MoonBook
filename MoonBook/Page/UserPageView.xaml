@@ -12,7 +12,7 @@
     </Grid.RowDefinitions>
     <Ellipse Height="136" Stroke="Black" Canvas.Top="10" Width="136" Canvas.Left="43" x:Name="Photo" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="46,18,0,0">
         <Ellipse.Fill>
-            <ImageBrush ImageSource="img/android_contacts_FILL0_wght400_GRAD0_opsz48.png"/>
+            <ImageBrush ImageSource="/img/android_contacts_FILL0_wght400_GRAD0_opsz48.png"/>
         </Ellipse.Fill>
     </Ellipse>
     <TextBlock Canvas.Left="43" TextWrapping="Wrap" Canvas.Top="165" Foreground="Black" x:Name="Name" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="18" Margin="12,159,0,0" Height="24" Width="204"/>

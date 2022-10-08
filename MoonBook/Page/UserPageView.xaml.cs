@@ -71,11 +71,6 @@ namespace MoonBook
                 Title = "Open epub file"
             };
             onlineLib = new LibProtocol.Online();
-            openFileDialog1 = new OpenFileDialog()
-            {
-                Filter = "Image files (*.BMP, *.JPG, *.GIF, *.TIF, *.PNG, *.ICO, *.EMF, *.WMF)|*.bmp;*.jpg;*.gif; *.tif; *.png; *.ico; *.emf; *.wmf",
-                Title = "Open image file"
-            };
             server = new ServerConnect();
             server.onError += mess => MessageBox.Show(mess);
         }
@@ -92,11 +87,11 @@ namespace MoonBook
         }
         private void Send_Click(object sender, RoutedEventArgs e)
         {
-            Task.Run(()=> NewPost());
+            NewPost();
         }
         private void Image_Click(object sender, RoutedEventArgs e)
         {
-            Task.Run(() => OpenFileDialogForm());
+            OpenFileDialogForm();
         }
         private void FreandList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {

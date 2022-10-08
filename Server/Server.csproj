@@ -10,6 +10,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="img\**" />
+    <EmbeddedResource Remove="img\**" />
+    <None Remove="img\**" />
+    <Page Remove="img\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Include="AddDbContext.cs" />
     <Compile Include="App.xaml.cs" />
     <Compile Include="AssemblyInfo.cs" />
@@ -64,6 +71,8 @@
     <Compile Include="Migrations\20220710133149_Email.Designer.cs" />
     <Compile Include="Migrations\20220725085145_ImgStr.cs" />
     <Compile Include="Migrations\20220725085145_ImgStr.Designer.cs" />
+    <Compile Include="Migrations\20220829103020_DateBook.cs" />
+    <Compile Include="Migrations\20220829103020_DateBook.Designer.cs" />
     <Compile Include="Migrations\AddDbContextModelSnapshot.cs" />
   </ItemGroup>
 
@@ -89,10 +98,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\LibProtocol\LibProtocol.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="img\" />
   </ItemGroup>
 
 </Project>

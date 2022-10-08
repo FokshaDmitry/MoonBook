@@ -26,7 +26,7 @@ namespace MoonBook
         public Guid Id;
         public Guid IdUser;
         ServerConnect server;
-        public Post(string name, byte[] photo, string text, string title, string img, DateTime date, int like, int dislike, Guid IdPost, Guid iduser, LibProtocol.Online online)
+        public Post(string name, byte[] photo, string text, string title, byte[] img, DateTime date, int like, int dislike, Guid IdPost, Guid iduser, LibProtocol.Online online)
         {
             InitializeComponent();
             Name.Text = name;
@@ -45,6 +45,14 @@ namespace MoonBook
                 imgsource.StreamSource = new MemoryStream(photo);
                 imgsource.EndInit();
                 PostPhoto.Fill = new ImageBrush(imgsource);
+            }
+            if (img != null)
+            {
+                BitmapImage imgsource = new BitmapImage();
+                imgsource.BeginInit();
+                imgsource.StreamSource = new MemoryStream(img);
+                imgsource.EndInit();
+                Image.Source = imgsource;
             }
             foreach (var coment in online.comments.Where(c => c.idPost == Id).OrderByDescending(c => c.Date).Join(online.users, c => c.idUser, u => u.Id, (c, u) => new { comm = c, use = u }).Distinct())
             {

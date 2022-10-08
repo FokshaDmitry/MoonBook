@@ -1,4 +1,6 @@
-﻿using System;
+﻿using LibProtocol.Models;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,73 +11,60 @@ namespace Server.CommandServer
     public class Reaction
     {
         LibProtocol.Models.Reactions data;
-        AddDbContext add;
+        AddDbContext _context;
         public Reaction(LibProtocol.Models.Reactions data)
         {
             this.data = data;
-            add = new AddDbContext();
+            _context = new AddDbContext();
         }
 
         public LibProtocol.Response buildResponce(ref LibProtocol.Response response)
         {
             try
             {
-                var qerty = add.Reactions.Where(r => r.IdPost == data.IdPost).Join(add.Posts, r => r.IdPost, p => p.Id, (r, p) => new { Ract = r, Post = p });
+                var qerty = _context.Reactions.Where(r => r.IdPost == data.IdPost).Join(_context.Posts, r => r.IdPost, p => p.Id, (r, p) => new { Ract = r, Post = p }).FirstOrDefault();
 
-                foreach (var reac in qerty)
+                if (qerty != null)
                 {
-                    if (reac.Ract.IdUser == data.IdUser)
+                    if (qerty.Ract.Reaction == data.Reaction && qerty.Ract.Reaction == 1)
                     {
-                        if(reac.Ract.Reaction == data.Reaction && reac.Ract.Reaction == 1)
-                        {
-                            reac.Ract.Reaction = 0;
-                            reac.Post.Like--;
-                            add.Posts.Update(reac.Post);
-                            add.Reactions.Update(reac.Ract);
-                        }
-                        else if (reac.Ract.Reaction == data.Reaction && reac.Ract.Reaction == 2)
-                        {
-                            reac.Ract.Reaction = 0;
-                            reac.Post.Dislike--;
-                            add.Posts.Update(reac.Post);
-                            add.Reactions.Update(reac.Ract);
-                        }
-                        else if (reac.Ract.Reaction != data.Reaction && data.Reaction == 1)
-                        {
-                            reac.Ract.Reaction = 1;
-                            reac.Post.Like++;
-                            if (reac.Post.Dislike != 0) reac.Post.Dislike--;
-                            add.Posts.Update(reac.Post);
-                            add.Reactions.Update(reac.Ract);
-                        }
-                        else if (reac.Ract.Reaction != data.Reaction && data.Reaction == 2)
-                        {
-                            reac.Ract.Reaction = 2;
-                            reac.Post.Dislike++;
-                            if(reac.Post.Like != 0) reac.Post.Like--;
-                            add.Posts.Update(reac.Post);
-                            add.Reactions.Update(reac.Ract);
-                        }
+                        qerty.Post.Like--;
+                        _context.Posts.Update(qerty.Post);
+                        _context.Reactions.Remove(qerty.Ract);
                     }
-                    else
+                    else if (qerty.Ract.Reaction == data.Reaction && qerty.Ract.Reaction == 2)
                     {
-                        if (data.Reaction == 1) reac.Post.Like++;
-                        else reac.Post.Dislike++;
-
-                        add.Posts.Update(reac.Post);
-                        add.Reactions.Add(data);
+                        qerty.Post.Dislike--;
+                        _context.Posts.Update(qerty.Post);
+                        _context.Reactions.Remove(qerty.Ract);
+                    }
+                    else if (qerty.Ract.Reaction != data.Reaction && data.Reaction == 1)
+                    {
+                        qerty.Ract.Reaction = 1;
+                        qerty.Post.Like++;
+                        if (qerty.Post.Dislike != 0) qerty.Post.Dislike--;
+                        _context.Posts.Update(qerty.Post);
+                        _context.Reactions.Update(qerty.Ract);
+                    }
+                    else if (qerty.Ract.Reaction != data.Reaction && data.Reaction == 2)
+                    {
+                        qerty.Ract.Reaction = 2;
+                        qerty.Post.Dislike++;
+                        if (qerty.Post.Like != 0) qerty.Post.Like--;
+                        _context.Posts.Update(qerty.Post);
+                        _context.Reactions.Update(qerty.Ract);
                     }
                 }
-                if (qerty.Count() == 0)
+                else
                 {
-                    var q = add.Posts.Where(p => p.Id == data.IdPost).Single();
+                    var q = _context.Posts.Where(p => p.Id == data.IdPost).FirstOrDefault();
                     if (data.Reaction == 1) q.Like++;
                     else q.Dislike++;
-                    
-                    add.Reactions.Add(data);
-                    add.Posts.Update(q);
+
+                    _context.Posts.Update(q);
+                    _context.Reactions.Add(new Reactions { Id = Guid.NewGuid(), IdPost = data.IdPost, IdUser = data.IdUser, Reaction = data.Reaction });
                 }
-                add.SaveChanges();
+                _context.SaveChanges();
                 response.succces = true;
                 response.code = LibProtocol.ResponseCode.Ok;
             }

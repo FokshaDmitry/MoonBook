@@ -19,8 +19,11 @@ namespace Server.Commands
         {
             try
             {
-                var q = add.Books.Where(c => c.Id == id).Single();
-                add.Remove(q);
+                var q = add.Books.Where(c => c.Id == id).FirstOrDefault();
+                Guid deleteBook = Guid.NewGuid();
+                add.DeleteLists.Add( new LibProtocol.Models.DeleteList { Id = deleteBook, Date = DateTime.Now, idElement = q.Id, idUser = (Guid)q.idUser } );
+                q.Delete = deleteBook;
+                add.Books.Update(q);
                 add.SaveChanges();
                 response.code = LibProtocol.ResponseCode.Ok;
                 response.succces = true;

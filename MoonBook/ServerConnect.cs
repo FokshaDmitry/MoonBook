@@ -51,11 +51,11 @@ namespace MoonBook
                 onError?.Invoke(ex.Message);
             }
         }
-        public void addPost(Guid idU, string name, string title, string text, string img)
+        public void addPost(Guid idU, string title, string text, byte[] img)
         {
             LibProtocol.Request request = new LibProtocol.Request();
             request.command = LibProtocol.Command.addPost;
-            request.data = new LibProtocol.Models.Posts { Id = Guid.NewGuid(), Date = DateTime.Now, Title = title, Text = text, Image = img, Like = 0, Dislike = 0, IdUser = idU };
+            request.data = new LibProtocol.Models.Posts { Id = Guid.NewGuid(), Date = DateTime.Now, Title = title, Text = text, ImageMass = img, Like = 0, Dislike = 0, IdUser = idU };
             try
             {
                 bf.Serialize(stream, request);

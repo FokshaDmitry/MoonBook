@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,6 +28,10 @@ namespace Server.Commands
             {
                 foreach (var book in add.Books.Where(b => b.idUser == id))
                 {
+                    if (!String.IsNullOrEmpty(book.CoverName))
+                    {
+                        book.CoverImage = File.ReadAllBytes("./img_post/" + book.CoverName);
+                    }
                     online.books.Add(book);
                 }
                 foreach (var subbook in add.SubBooks.Where(s => s.idUser == id).Join(add.Books, s => s.idBook, b => b.Id, (s, b) => new { Sub = s, Book = b }))
@@ -38,11 +43,11 @@ namespace Server.Commands
                 response.succces = true;
                 response.code = LibProtocol.ResponseCode.Ok;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 response.succces = false;
                 response.code = LibProtocol.ResponseCode.Error;
-                response.StatusTxt = "Online False";
+                response.StatusTxt = "Online Book False: " + ex;
             }
             return response;
         }

@@ -39,12 +39,12 @@ namespace Server.Commands
             try
             {
                 String photoName = Guid.NewGuid().ToString();
-                using (FileStream stream = new FileStream("./img/" + photoName + ".img", FileMode.CreateNew))
+                using (FileStream stream = new FileStream("./img/" + photoName + ".png", FileMode.CreateNew))
                 {
                     stream.Write(data.Phpto, 0, data.Phpto.Length);
                 }
                 data.RegMoment = DateTime.Now;
-                data.PhotoName = photoName;
+                data.PhotoName = photoName + ".png";
                 data.PassSalt = _hasher.heshString(DateTime.Now.ToString());
                 data.Password = _hasher.heshString(data.Password + data.PassSalt);
                 add.Users.Add(data);

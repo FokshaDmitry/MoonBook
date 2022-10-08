@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,6 +18,9 @@ namespace LibProtocol.Models
         public int Like { get; set; }
         public int Dislike { get; set; }
         public Guid IdUser { get; set; }
+        public Guid Delete { get; set; }
+        [NotMapped]
+        public byte[]? ImageMass { get; set; }
 
     }
 }

@@ -17,13 +17,14 @@ namespace Server
         public DbSet<LibProtocol.Models.Subscriptions> Subscriptions { get; set; }
         public DbSet<LibProtocol.Models.Books> Books { get; set; }
         public DbSet<LibProtocol.Models.SubBook> SubBooks { get; set; }
+        public DbSet<LibProtocol.Models.DeleteList> DeleteLists { get; set; }
         public AddDbContext()
         { 
             Database.EnsureCreated();
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\Проекты\MoonBook\Server\DbaseMB.mdf;Integrated Security=True");
+            optionsBuilder.UseSqlServer(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\Проекты\MoonBookWeb\MoonBookWeb\DbaseMB.mdf;Integrated Security=True");
         }
     }
 }
