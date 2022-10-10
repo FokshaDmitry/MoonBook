@@ -54,11 +54,19 @@ namespace MoonBook
                 imgsource.EndInit();
                 Image.Source = imgsource;
             }
+            if(online.comments != null && online.comments.Count() > 0)
+            {
+                CommentCurrentPost(online);
+            }
+        }
+
+        public void CommentCurrentPost(LibProtocol.Online online)
+        {
             foreach (var coment in online.comments.Where(c => c.idPost == Id).OrderByDescending(c => c.Date).Join(online.users, c => c.idUser, u => u.Id, (c, u) => new { comm = c, use = u }).Distinct())
             {
-                ListComments.Items.Add(new Comment(coment.comm.Id , $"{coment.use.Name} {coment.use.Surname}", coment.comm.Date, coment.use.Phpto, coment.comm.Text, coment.comm.idPost, coment.use.Id));
+                ListComments.Items.Add(new Comment(coment.comm.Id, $"{coment.use.Name} {coment.use.Surname}", coment.comm.Date, coment.use.Phpto, coment.comm.Text, coment.comm.idPost, coment.use.Id));
             }
-         }
+        }
         public void Reaction(int Reakt)
         {
             server.Connect();

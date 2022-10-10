@@ -39,15 +39,15 @@ namespace Server.CommandServer
                     {
                         Online.Post.ImageMass = File.ReadAllBytes("./img_post/" + Online.Post.Image);
                     }
-                    online.posts.Add(Online.Post);
-                    online.users.Add(Online.User);
+                    online?.posts?.Add(Online.Post);
+                    online?.users?.Add(Online.User);
                     IdP.Add(Online.Post.Id);
                 }
                 foreach (var id in IdP)
                 {
                     foreach (var comment in add.Comments.Where(c => c.idPost == id).Where(c => c.Delete == Guid.Empty))
                     {
-                        online?.comments.Add(comment);
+                        online?.comments?.Add(comment);
                     }
                 }
                 foreach (var book in add.Books.Where(b => b.idUser == id).Where(b => b.Delete == Guid.Empty))
@@ -56,7 +56,7 @@ namespace Server.CommandServer
                     {
                         book.CoverImage = File.ReadAllBytes("./img_post/" + book.CoverName);
                     }
-                    online.books.Add(book);
+                    online?.books?.Add(book);
                 }
                 foreach (var users in add.Subscriptions.Where(s => s.IdUser == id).Join(add.Users, s => s.IdFreand, u => u.Id, (s, u) => new {Sub = s, User = u}).Where(u => u.User.Delete == Guid.Empty))
                 {
@@ -64,8 +64,8 @@ namespace Server.CommandServer
                     {
                         users.User.Phpto = File.ReadAllBytes("./img/" + users.User.PhotoName);
                     }
-                    online.subscriptions.Add(users.Sub);
-                    online.users.Add(users.User);
+                    online?.subscriptions?.Add(users.Sub);
+                    online?.users?.Add(users.User);
                 }
                 response.data = new LibProtocol.Online { posts = online.posts, comments = online.comments, users = online.users, books = online.books, subscriptions = online.subscriptions };
                 response.succces = true;

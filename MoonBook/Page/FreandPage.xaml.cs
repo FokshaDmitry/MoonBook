@@ -20,11 +20,11 @@ namespace MoonBook
     /// </summary>
     public partial class FreandPage : Grid
     {
-        public UserPage main;
+        public MoonBookPage main;
         public Guid idUser;
         public ServerConnect server;
         public LibProtocol.Online onlineLib;
-        public FreandPage(Guid idUser , UserPage main)
+        public FreandPage(Guid idUser , MoonBookPage main)
         {
             InitializeComponent();
             this.main = main;
