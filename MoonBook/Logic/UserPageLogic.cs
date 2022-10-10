@@ -17,10 +17,10 @@ using System.Windows.Threading;
 
 namespace MoonBook
 {
-    public class UserPageLogic : UserPageView
+    public class UserPageLogic : UserPage
     {
 
-        public UserPageLogic(Guid guid, string? name, string? surname, string status, byte[] photo, DateTime birthday, string login, UserPage main) : base(guid, name, surname, status, photo, birthday, login, main)
+        public UserPageLogic(Guid guid, string? name, string? surname, string status, byte[] photo, DateTime birthday, string login, MoonBookPage main) : base(guid, name, surname, status, photo, birthday, login, main)
         {
             openFileDialog1 = new OpenFileDialog()
             {
@@ -90,11 +90,11 @@ namespace MoonBook
                 {
                     VewPost.Items.Add(new Post($"{post.use.Name} {post.use.Surname}", post.use.Phpto, post.pos.Text, post.pos.Title, post.pos.ImageMass, post.pos.Date, post.pos.Like, post.pos.Dislike, post.pos.Id, idUser, onlineLib));
                 }
-                foreach (var book in onlineLib.books)
+                foreach (var book in onlineLib?.books.Distinct())
                 {
                     ListBookUser.Items.Add(new Book(book.Id, book.CoverImage, book.Title, book.Author, book.TextContent, book.idUser));
                 }
-                foreach (var users in onlineLib.subscriptions.Where(s => s.IdUser == idUser).Join(onlineLib.users, s => s.IdFreand, u => u.Id, (s, u) => new { Sub = s, User = u }))
+                foreach (var users in onlineLib.subscriptions.Where(s => s.IdUser == idUser).Join(onlineLib.users, s => s.IdFreand, u => u.Id, (s, u) => new { Sub = s, User = u }).Distinct())
                 {
                     FreandList.Items.Add(new FreandUser(users.User.Id, users.User.Phpto, users.User.Online));
                 }
@@ -117,7 +117,7 @@ namespace MoonBook
             Dispatcher.Invoke(() =>
             {
                 addBookForm = new AddBookForm(idUser);
-                //addBookForm.Owner = main;
+                addBookForm.Owner = main.main;
                 addBookForm.Show();
             });
         }

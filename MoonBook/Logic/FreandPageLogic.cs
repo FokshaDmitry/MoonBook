@@ -11,7 +11,7 @@ namespace MoonBook.Logic
 {
     public class FreandPageLogic : FreandPage
     {
-        public FreandPageLogic(Guid idUser, UserPage main) : base(idUser, main)
+        public FreandPageLogic(Guid idUser, MoonBookPage main) : base(idUser, main)
         {
 
         }
@@ -50,14 +50,14 @@ namespace MoonBook.Logic
                     Dispatcher.Invoke(() =>
                     {
                         ListUser.Items.Clear();
-                        foreach (var user in onlineLib.subscriptions.Join(onlineLib.users, s => s.IdFreand, u => u.Id, (s, u) => new { Sub = s, Use = u }))
+                        foreach (var user in onlineLib.subscriptions.Join(onlineLib.users, s => s.IdFreand, u => u.Id, (s, u) => new { Sub = s, Use = u }).Distinct())
                         {
-                            ListUser.Items.Add(new User(idUser, $"{user.Use.Name} {user.Use.Surname}", user.Use.Phpto, user.Use.Online, true, user.Use.Id, this));
+                            ListUser.Items.Add(new User(idUser, $"{user.Use.Name} {user.Use.Surname}", user?.Use?.Phpto, user.Use.Online, true, user.Use.Id, this));
                             onlineLib.users.Remove(user.Use);
                         }
-                        foreach (var user in onlineLib.users)
+                        foreach (var user in onlineLib.users.Distinct())
                         {
-                            ListUser.Items.Add(new User(idUser, $"{user.Name} {user.Surname}", user.Phpto, user.Online, false, user.Id, this));
+                            ListUser.Items.Add(new User(idUser, $"{user.Name} {user.Surname}", user?.Phpto, user.Online, false, user.Id, this));
 
                         }
                     });
@@ -89,15 +89,15 @@ namespace MoonBook.Logic
                     BlogListFreand.Items.Clear();
                     FreandBook.Items.Clear();
                     FrendsFreadList.Items.Clear();
-                    foreach (var post in onlineLib.posts.Join(onlineLib.users, p => p.IdUser, u => u.Id, (p, u) => new { pos = p, use = u }).Distinct())
+                    foreach (var post in onlineLib?.posts.Join(onlineLib.users, p => p.IdUser, u => u.Id, (p, u) => new { pos = p, use = u }).Distinct())
                     {
-                        BlogListFreand.Items.Add(new Post(post.use.Name + " " + post.use.Surname, post.use.Phpto, post.pos.Text, post.pos.Title, post.pos.ImageMass, post.pos.Date, post.pos.Like, post.pos.Dislike, post.pos.Id, idUser, onlineLib));
+                        BlogListFreand.Items.Add(new Post($"{post.use.Name} {post.use.Surname}", post.use.Phpto, post.pos.Text, post.pos.Title, post.pos.ImageMass, post.pos.Date, post.pos.Like, post.pos.Dislike, post.pos.Id, idUser, onlineLib));
                     }
-                    foreach (var book in onlineLib.books)
+                    foreach (var book in onlineLib?.books)
                     {
                         FreandBook.Items.Add(new Book(book.Id, book.CoverImage, book.Title, book.Author, book.TextContent, book.idUser));
                     }
-                    foreach (var sub in onlineLib.subscriptions.Join(onlineLib.users, s => s.IdFreand, u => u.Id, (s, u) => new { Sub = s, User = u }))
+                    foreach (var sub in onlineLib?.subscriptions.Join(onlineLib.users, s => s.IdFreand, u => u.Id, (s, u) => new { Sub = s, User = u }).Distinct())
                     {
                         FrendsFreadList.Items.Add(new FreandUser(sub.User.Id, sub.User.Phpto, sub.User.Online));
                     }
